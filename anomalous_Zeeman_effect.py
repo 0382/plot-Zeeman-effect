@@ -252,12 +252,14 @@ def anomalous_Zeeman_effect_intensity(LSJ1:list, LSJ2:list, filename:str=None):
     ax.set_xticklabels([str(pos) for pos in positions])
     vertical = lambda x, y : plt.plot([x, x], [0, float(y)], '-', color='black', linewidth=1)
     text = lambda x, y : plt.text(x, float(y), f'{y}')
-    for spectrum in pi:
+    for i,spectrum in enumerate(pi):
         vertical(spectrum[0], spectrum[1])
         text(spectrum[0], spectrum[1])
-    for spectrum in sigma:
+        plt.text(spectrum[0], spectrum[1]/2, r'$\pi_%d$'%(i+1))
+    for i,spectrum in enumerate(sigma):
         vertical(spectrum[0], -spectrum[1])
         text(spectrum[0], -spectrum[1])
+        plt.text(spectrum[0], -spectrum[1]/2, r'$\sigma_%d$'%(i+1))
     plt.text(max_pos, -max_intensity/2, r'$\sigma$光')
     plt.text(max_pos, max_intensity/2, r'$\pi$光')
     if filename == None:
